@@ -24,5 +24,40 @@ namespace Project_ICT
         {
             InitializeComponent();
         }
+
+        private void btnAnimation1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAnimation2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAnimation3_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAnimation4_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void sldRed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
+
+        private void sldGreen_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
+
+        private void sldBlue_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
     }
 }

@@ -5,13 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_ICT"
         mc:Ignorable="d"
-        Title="Project ICT" Height="450" Width="800">
+        Title="Project ICT" Height="450" Width="600">
     <StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Button x:Name="btnAnimation1" Height="20" Width="100" Margin="10,0,10,0"></Button>
-            <Button x:Name="btnAnimation2" Height="20" Width="100" Margin="10,0,10,0"></Button>
-            <Button x:Name="btnAnimation3" Height="20" Width="100" Margin="10,0,10,0"></Button>
-            <Button x:Name="btnAnimation4" Height="20" Width="100" Margin="10,0,10,0"></Button>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnAnimation1" Height="20" Width="100" Margin="20,20,20,0" Click="btnAnimation1_Click">Animation 1</Button>
+            <Button x:Name="btnAnimation2" Height="20" Width="100" Margin="20,20,20,0" Click="btnAnimation2_Click">Animation 2</Button>
+            <Button x:Name="btnAnimation3" Height="20" Width="100" Margin="20,20,20,0" Click="btnAnimation3_Click">Animation 3</Button>
+            <Button x:Name="btnAnimation4" Height="20" Width="100" Margin="20,20,20,0" Click="btnAnimation4_Click">Animation 4</Button>
         </StackPanel>
+        <GroupBox HorizontalAlignment="Center" Margin="10" Header="Red">
+            <Slider x:Name="sldRed" Minimum="0" Maximum="255" Width="400" IsSnapToTickEnabled="True" AutoToolTipPlacement="TopLeft" ValueChanged="sldRed_ValueChanged"></Slider>
+        </GroupBox>
+        <GroupBox HorizontalAlignment="Center" Margin="10" Header="Green">
+            <Slider x:Name="sldGreen" Minimum="0" Maximum="255" Width="400" IsSnapToTickEnabled="True" AutoToolTipPlacement="TopLeft" ValueChanged="sldGreen_ValueChanged"></Slider>
+        </GroupBox>
+        <GroupBox HorizontalAlignment="Center" Margin="10" Header="Blue">
+            <Slider x:Name="sldBlue" Minimum="0" Maximum="255" Width="400" IsSnapToTickEnabled="True" AutoToolTipPlacement="TopLeft" ValueChanged="sldBlue_ValueChanged"></Slider>
+        </GroupBox>
     </StackPanel>
 </Window>

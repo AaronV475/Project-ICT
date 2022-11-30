@@ -10,7 +10,6 @@ namespace Project_ICT
     {
         public void Rotate_Animation(int color, int cycles)
         {
-
         }
 
         public void Move_Animation(int color, int cycles)
@@ -18,10 +17,16 @@ namespace Project_ICT
 
         }
 
-        public void RGB_Animation(int Red, int Green, int Blue)
+        public void RGB_Animation(int cycles)
         {
 
         }
+
+        public void RGB_Realtime(int Red, int Green, int Blue)
+        {
+
+        }
+
         public void Idle_Animation()
         {
 

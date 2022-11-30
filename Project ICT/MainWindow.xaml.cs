@@ -27,7 +27,7 @@ namespace Project_ICT
 
         private void btnAnimation1_Click(object sender, RoutedEventArgs e)
         {
-
+            sldRed.Value = 0b0010;
         }
 
         private void btnAnimation2_Click(object sender, RoutedEventArgs e)

@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "o0+4sEFoPcxKOH9OdgiIlWZGScERrmQ5w+QFG+ux8lo7WcVqHkXNGdjcZz0tBii4H8nLBNaDowWg3v0pPlycTQ==",
+  "dgSpecHash": "B3tlZr4n1XIxOBOxtLUCLIUKzn9bg/O6QGBiCsnbhKr3BH3WPmQrmuZSsbCb/2ME0WVWMQ4gKmc3stIv8KSBuw==",
   "success": true,
   "projectFilePath": "E:\\Programs\\Project_ICT\\Project ICT\\Project ICT.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\aaron\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\7.0.0\\runtime.linux-arm.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\aaron\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\7.0.0\\runtime.linux-arm64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\aaron\\.nuget\\packages\\runtime.linux-x64.runtime.native.system.io.ports\\7.0.0\\runtime.linux-x64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\aaron\\.nuget\\packages\\runtime.native.system.io.ports\\7.0.0\\runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\aaron\\.nuget\\packages\\runtime.osx-arm64.runtime.native.system.io.ports\\7.0.0\\runtime.osx-arm64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\aaron\\.nuget\\packages\\runtime.osx-x64.runtime.native.system.io.ports\\7.0.0\\runtime.osx-x64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\aaron\\.nuget\\packages\\system.io.ports\\7.0.0\\system.io.ports.7.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

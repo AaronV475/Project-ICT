@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO.Ports;
 
 namespace Project_ICT
 {
@@ -20,9 +21,17 @@ namespace Project_ICT
     /// </summary>
     public partial class MainWindow : Window
     {
+        SerialPort _serialPort;
         public MainWindow()
         {
             InitializeComponent();
+            _serialPort = new SerialPort();
+
+            cbxSerialSelect.Items.Add("None");
+            foreach (string s in SerialPort.GetPortNames())
+            {
+                cbxSerialSelect.Items.Add(s);
+            }
         }
 
         private void btnAnimation1_Click(object sender, RoutedEventArgs e)
@@ -58,6 +67,31 @@ namespace Project_ICT
         private void sldBlue_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
 
+        }
+
+        private void cbxSerialSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_serialPort != null)
+            {
+                if (_serialPort.IsOpen)
+                    _serialPort.Close();
+
+                if (cbxSerialSelect.SelectedItem.ToString() != "None")
+                {
+                    _serialPort.PortName = cbxSerialSelect.SelectedItem.ToString();
+                    _serialPort.Open();
+                }
+            }
+        }
+
+        private void btnSerialRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            cbxSerialSelect.Items.Clear();
+            cbxSerialSelect.Items.Add("None");
+            foreach (string s in SerialPort.GetPortNames())
+            {
+                cbxSerialSelect.Items.Add(s);
+            }
         }
     }
 }

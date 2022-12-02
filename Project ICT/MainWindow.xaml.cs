@@ -25,18 +25,13 @@ namespace Project_ICT
         public MainWindow()
         {
             InitializeComponent();
-            _serialPort = new SerialPort();
 
-            cbxSerialSelect.Items.Add("None");
-            foreach (string s in SerialPort.GetPortNames())
-            {
-                cbxSerialSelect.Items.Add(s);
-            }
+            _serialPort = new SerialPort();
         }
 
         private void btnAnimation1_Click(object sender, RoutedEventArgs e)
         {
-            sldRed.Value = 0b0010;
+            
         }
 
         private void btnAnimation2_Click(object sender, RoutedEventArgs e)
@@ -69,28 +64,28 @@ namespace Project_ICT
 
         }
 
-        private void cbxSerialSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (_serialPort != null)
-            {
-                if (_serialPort.IsOpen)
-                    _serialPort.Close();
-
-                if (cbxSerialSelect.SelectedItem.ToString() != "None")
-                {
-                    _serialPort.PortName = cbxSerialSelect.SelectedItem.ToString();
-                    _serialPort.Open();
-                }
-            }
-        }
-
-        private void btnSerialRefresh_Click(object sender, RoutedEventArgs e)
+        private void cbxSerialSelect_DropDownOpened(object sender, EventArgs e)
         {
             cbxSerialSelect.Items.Clear();
             cbxSerialSelect.Items.Add("None");
             foreach (string s in SerialPort.GetPortNames())
             {
                 cbxSerialSelect.Items.Add(s);
+            }
+
+            if (_serialPort != null)
+            {
+                if (_serialPort.IsOpen)
+                    _serialPort.Close();
+
+                if (cbxSerialSelect.SelectedItem != null)
+                {
+                    if (cbxSerialSelect.SelectedItem.ToString() != "None")
+                    {
+                        _serialPort.PortName = cbxSerialSelect.SelectedItem.ToString();
+                        _serialPort.Open();
+                    }
+                }
             }
         }
     }

@@ -8,11 +8,7 @@
         Title="Project ICT" Height="450" Width="600">
     <StackPanel>
         <GroupBox HorizontalAlignment="Left" Margin="5" Header="Output select">
-            <StackPanel Orientation="Horizontal">
-                <ComboBox Name="cbxSerialSelect" SelectionChanged="cbxSerialSelect_SelectionChanged" Width="200" Margin="10,5,10,5"></ComboBox>
-                <Button x:Name="btnSerialRefresh" Width="100" Margin="10,5,10,5" Click="btnSerialRefresh_Click">Refresh</Button>
-            </StackPanel>
-            
+            <ComboBox Name="cbxSerialSelect" Width="200" Margin="10,5,10,5" DropDownOpened="cbxSerialSelect_DropDownOpened"></ComboBox>
         </GroupBox>
         <GroupBox HorizontalAlignment="Left" Margin="5" Header="Animation select">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

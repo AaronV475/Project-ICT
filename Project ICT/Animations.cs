@@ -10,6 +10,7 @@ namespace Project_ICT
     {
         public void Rotate_Animation(int color, int cycles)
         {
+
         }
 
         public void Move_Animation(int color, int cycles)

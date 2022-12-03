@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_ICT"
         mc:Ignorable="d"
-        Title="Project ICT" Height="450" Width="600">
+        Title="Project ICT" SizeToContent="WidthAndHeight">
     <StackPanel>
         <GroupBox HorizontalAlignment="Left" Margin="5" Header="Output select">
-            <ComboBox Name="cbxSerialSelect" Width="200" Margin="10,5,10,5" DropDownOpened="cbxSerialSelect_DropDownOpened"></ComboBox>
+            <ComboBox Name="cbxSerialSelect" Width="200" Margin="10,5,10,5" DropDownOpened="cbxSerialSelect_DropDownOpened" SelectionChanged="cbxSerialSelect_SelectionChanged"></ComboBox>
         </GroupBox>
         <GroupBox HorizontalAlignment="Left" Margin="5" Header="Animation select">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -18,18 +18,23 @@
                 <Button x:Name="btnAnimation4" Height="20" Width="100" Margin="20,5,20,5" Click="btnAnimation4_Click">Animation 4</Button>
             </StackPanel>
         </GroupBox>
-        <GroupBox HorizontalAlignment="Left" Margin="10" Header="Color select">
-            <StackPanel>
-                <GroupBox HorizontalAlignment="Center" Margin="10" Header="Red">
-                    <Slider x:Name="sldRed" Minimum="0" Maximum="255" Width="400" IsSnapToTickEnabled="True" AutoToolTipPlacement="TopLeft" ValueChanged="sldRed_ValueChanged"></Slider>
-                </GroupBox>
-                <GroupBox HorizontalAlignment="Center" Margin="10" Header="Green">
-                    <Slider x:Name="sldGreen" Minimum="0" Maximum="255" Width="400" IsSnapToTickEnabled="True" AutoToolTipPlacement="TopLeft" ValueChanged="sldGreen_ValueChanged"></Slider>
-                </GroupBox>
-                <GroupBox HorizontalAlignment="Center" Margin="10" Header="Blue">
-                    <Slider x:Name="sldBlue" Minimum="0" Maximum="255" Width="400" IsSnapToTickEnabled="True" AutoToolTipPlacement="TopLeft" ValueChanged="sldBlue_ValueChanged"></Slider>
-                </GroupBox>
-            </StackPanel>
-        </GroupBox>
+        <StackPanel Orientation="Horizontal">
+            <GroupBox HorizontalAlignment="Left" Margin="10" Header="Color select">
+                <StackPanel>
+                    <GroupBox HorizontalAlignment="Center" Margin="10" Header="Red">
+                        <Slider x:Name="sldRed" Minimum="0" Maximum="255" Width="400" IsSnapToTickEnabled="True" AutoToolTipPlacement="TopLeft" ValueChanged="sldRed_ValueChanged" TickFrequency="15"></Slider>
+                    </GroupBox>
+                    <GroupBox HorizontalAlignment="Center" Margin="10" Header="Green">
+                        <Slider x:Name="sldGreen" Minimum="0" Maximum="255" Width="400" IsSnapToTickEnabled="True" AutoToolTipPlacement="TopLeft" ValueChanged="sldGreen_ValueChanged" TickFrequency="15"></Slider>
+                    </GroupBox>
+                    <GroupBox HorizontalAlignment="Center" Margin="10" Header="Blue">
+                        <Slider x:Name="sldBlue" Minimum="0" Maximum="255" Width="400" IsSnapToTickEnabled="True" AutoToolTipPlacement="TopLeft" ValueChanged="sldBlue_ValueChanged" TickFrequency="15"></Slider>
+                    </GroupBox>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Color preview" Margin="5,10,5,10" Padding="5">
+                <Canvas x:Name="cnvsColorPreview" Width="85" Height="120" Background="Black"></Canvas>
+            </GroupBox>
+        </StackPanel>
     </StackPanel>
 </Window>

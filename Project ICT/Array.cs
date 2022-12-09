@@ -1,144 +1,146 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-//namespace Project_ICT
-//{
-//    internal class Array
-//    {
-//        byte[,,] cube = new byte[,,] { { { 9, 9, 9 } } };
-//        byte[,,] cubes = new byte[,,] 
-//        { 
-//            { 
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//            },
-//            {
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//            },
-//            {
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//            },
-//            {
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//            },
-//            {
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//            },
-//            {
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//            },
-//            {
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//            },
-//            {
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//            },
-//            {
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//                { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-//            }
-//        };
-//        void ClearCube()
-//        {
-//            memset(cube, 0, 125 * sizeof cube[0][0][0]);
-//        }
+namespace Project_ICT
+{
+    internal class Array
+    {
+        public int[,,,] data = new int[,,,]    // In theorie kan je hiermee zowel de volledige cube, een plane, een row of een enkele LED aansturen
+        {                                      // 3 planes to form the cube
+            {                                  // 3 rows to form a plane
+                { {0,0,0}, {0,0,0}, {0,0,0} }, // 3 LEDS to form a row
+                { {0,0,0}, {0,0,0}, {0,0,0} },
+                { {0,0,0}, {0,0,0}, {0,0,0} }
+            },
+            {
+                { {0,0,0}, {0,0,0}, {0,0,0} },
+                { {0,0,0}, {0,0,0}, {0,0,0} },
+                { {0,0,0}, {0,0,0}, {0,0,0} }
+            },
+            {
+                { {0,0,0}, {0,0,0}, {0,0,0} },
+                { {0,0,0}, {0,0,0}, {0,0,0} },
+                { {0,0,0}, {0,0,0}, {0,0,0} }
+            }
+        };
+        // OR
 
-//        // turns on a specific LED
-//        void LedOn(int x, int y, int z)
-//        {
-//            cube[x, y, z] = 1;
-//        }
-//        // turns off a specific LED
-//        void LedOff(int x, int y, int z)
-//        {
-//            cube[x, y, z] = 0;
-//        }
+        public int[,] data2 = new int[,] { // Hiermee specifiek de led aansturen en de 3 waardes van de led.
+            { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 }, 
+            { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 }, 
+            { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 }, 
+            { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 }, 
+            { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 }, 
+            { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 }, 
+            { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 }, 
+            { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 }, 
+            { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
 
+        // turns verything off
+        void clearCube()
+        {
+            
+        }
 
-//        // This code is for 5x5x5 but can be converted to a 9x9x9
+        // turns on a specific LED
+        void ledOn(int x, int y, int z)
+        {
+            //data = [1,1,1,1];
+        }
+        // turns off a specific LED
+        void ledOff(int x, int y, int z)
+        {
+            //cube[x][y][z] = 0;
+        }
 
-//        // ***************************** Begin Pulsing Sphere ******************************************
-//        // creates a shpere which grows and shrinks 
-//        void PulsingSphere()
-//        {
-//            float count;
-//            for (int k = 0; k < 10; k++)
-//            {
-//                for ( count = 0.5f; count < 2.8; count += 0.3f)
-//                { // expand the radius
-//                    Sphere(count);
-//                }
-//                for (count = 2.7f; count > 0.5; count -= 0.3f)
-//                { // contaract the radius
-//                    Sphere(count);
-//                }
-//            }
-//        }
+        // show cube for a multiples of 10 ms before clearing it.
+        void showCube(int mytime)
+        {
+            //delay(10 * mytime);
+            clearCube();
+        }
 
-//        // this routine creates a sphere in the cube of a specified radius
-//        void Sphere(float radius)
-//        {
-//            float polar, j, k, l;
-//            for (int x = 0; x < 9; x++)
-//            { // scan thru each led in the cube
-//                for (int y = 0; y < 9; y++)
-//                {
-//                    for (int z = 0; z < 9; z++)
-//                    {
-//                        j = Convert.ToSingle(x); // convert coordinates to floating point to compute distance from center of cube
-//                        k = Convert.ToSingle(y);
-//                        l = Convert.ToSingle(z);
-//                        polar = (float)Math.Sqrt((j - 2) * (j - 2) + (k - 2) * (k - 2) + (l - 2) * (l - 2)); // Calculate the distance
-//                        if (polar < radius)
-//                        { // if an LED is inside the radius specified, turn it on.
-//                            LedOn(x, y, z);
-//                        }
-//                        else
-//                        { // otherwise turn it off
-//                            LedOff(x, y, z);
-//                        }
-//                    }
-//                }
-//            }
-//            delay(20);  // control speed
-//        }
-//        // ***************************** End Pulsing Sphere ******************************************
-//    }
-//}
+        // clear the cube and wait 1/2 second
+        void pause()
+        {  // pause between animations
+            clearCube();
+            //delay(500);
+        }
+        void panels()
+        {
+            for (int k = 0; k < 3; k++)
+            {
+                for (int z = 4; z > -1; z--)
+                {
+                    for (int x = 0; x < 5; x++)
+                    {
+                        for (int y = 0; y < 5; y++)
+                        {
+                            ledOn(x, y, z);
+                        }
+                    }
+                    showCube(4);
+                }
+                for (int z = 0; z < 5; z++)
+                {
+                    for (int x = 0; x < 5; x++)
+                    {
+                        for (int y = 0; y < 5; y++)
+                        {
+                            ledOn(x, y, z);
+                        }
+                    }
+                    showCube(4);
+                }
+                for (int x = 0; x < 5; x++)
+                {
+                    for (int z = 0; z < 5; z++)
+                    {
+                        for (int y = 0; y < 5; y++)
+                        {
+                            ledOn(x, y, z);
+                        }
+                    }
+                    showCube(4);
+                }
+                for (int x = 4; x > -1; x--)
+                {
+                    for (int z = 0; z < 5; z++)
+                    {
+                        for (int y = 0; y < 5; y++)
+                        {
+                            ledOn(x, y, z);
+                        }
+                    }
+                    showCube(4);
+                }
+                for (int y = 0; y < 5; y++)
+                {
+                    for (int x = 0; x < 5; x++)
+                    {
+                        for (int z = 0; z < 5; z++)
+                        {
+                            ledOn(x, y, z);
+                        }
+                    }
+                    showCube(4);
+                }
+                for (int y = 4; y > -1; y--)
+                {
+                    for (int x = 0; x < 5; x++)
+                    {
+                        for (int z = 0; z < 5; z++)
+                        {
+                            ledOn(x, y, z);
+                        }
+                    }
+                    showCube(4);
+                }
+            }
+            pause();
+        }
+    }
+}

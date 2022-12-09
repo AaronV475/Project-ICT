@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO.Ports;
+using System.Security;
+using System.Security.Cryptography;
+using System.Windows.Media.Animation;
 
 namespace Project_ICT
 {
@@ -21,36 +24,57 @@ namespace Project_ICT
     /// </summary>
     public partial class MainWindow : Window
     {
-        SerialPort _serialPort;
-        Brush? RGBBrush;
+        public SerialPort _serialPort;
+        Animations _animation = new Animations();
+
+        public int colorRed;
+        public int colorGreen;
+        public int colorBlue;
+        public int colorCombo = 0;
+        public double cubeSize = 3;
+        public double cube = 3;
+        public double plane = 2;
+        public double row = 1;
+        
         public MainWindow()
         {
             InitializeComponent();
 
             _serialPort = new SerialPort();
+
         }
 
         private void btnAnimation1_Click(object sender, RoutedEventArgs e)
         {
             if (_serialPort.IsOpen)
             {
-                _serialPort.Write("1");
+
             }
         }
 
-        private void btnAnimation2_Click(object sender, RoutedEventArgs e)
+        private async void btnAnimation2_Click(object sender, RoutedEventArgs e)
         {
+            int ledAmount = Convert.ToInt16(Math.Pow(cubeSize, cube));
+            for (int i = 0; i < ledAmount; i++)
+            {
+                _animation.RGB_CubeFill(i, ColorButtons());
+                lblData.Content = String.Join(" ", _animation.data3);
+                await Task.Delay(500);
+            }
+            lblColor.Content = _animation.RGB_ColorCombo(ColorButtons());
             if (_serialPort.IsOpen)
             {
-                _serialPort.Write("0");
             }
         }
 
         private void btnAnimation3_Click(object sender, RoutedEventArgs e)
         {
+            _animation.RGB_Animation(ColorButtons());
+            lblColor.Content = _animation.RGB_ColorCombo(ColorButtons());
+            lblData.Content = String.Join(" ", _animation.data3);
             if (_serialPort.IsOpen)
             {
-                _serialPort.WriteLine("A30");
+                
             }
         }
 
@@ -58,49 +82,19 @@ namespace Project_ICT
         {
             if (_serialPort.IsOpen)
             {
-                _serialPort.WriteLine("A40");
+ 
             }
-        }
-
-        private void sldRed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            RGBBrush = new SolidColorBrush(RGBcolor());
-            cnvsColorPreview.Background = RGBBrush;
-            if (_serialPort.IsOpen)
-            {
-                _serialPort.WriteLine("A45");
-            }
-        }
-
-        private void sldGreen_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            RGBBrush = new SolidColorBrush(RGBcolor());
-            cnvsColorPreview.Background = RGBBrush;
-        }
-
-        private void sldBlue_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            RGBBrush = new SolidColorBrush(RGBcolor());
-            cnvsColorPreview.Background = RGBBrush;
         }
 
         private void cbxSerialSelect_DropDownOpened(object sender, EventArgs e)
         {
+            // Refreshed de displayed ports in de combobox.
             cbxSerialSelect.Items.Clear();
             cbxSerialSelect.Items.Add("None");
             foreach (string ports in SerialPort.GetPortNames())
             {
                 cbxSerialSelect.Items.Add(ports);
             }
-
-            
-        }
-
-        private Color RGBcolor()
-        {
-            Color RGBcolor = new Color();
-            RGBcolor = Color.FromRgb(Convert.ToByte(sldRed.Value), Convert.ToByte(sldGreen.Value), Convert.ToByte(sldBlue.Value));
-            return RGBcolor;
         }
 
         private void cbxSerialSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -114,11 +108,32 @@ namespace Project_ICT
                 {
                     if (cbxSerialSelect.SelectedItem.ToString() != "None")
                     {
-                        _serialPort.PortName = cbxSerialSelect.SelectedItem.ToString();
+                        _serialPort.PortName = cbxSerialSelect.SelectedItem.ToString() ?? "None";
                         _serialPort.Open();
                     }
                 }
             }
+        }
+
+        public int ColorButtons()
+        {
+            if (chbRed.IsChecked ?? false)
+                colorRed = 1;
+            else
+                colorRed = 0;
+
+            if (chbGreen.IsChecked ?? false)
+                colorGreen = 2;
+            else
+                colorGreen = 0;
+
+            if (chbBlue.IsChecked ?? false)
+                colorBlue = 4;
+            else
+                colorBlue = 0;
+
+            return colorCombo = colorRed + colorGreen + colorBlue;
+            // colorCombo: 1 = red, 2 = green, 3 = yellow, 4 = blue, 5 = magenta, 6 = cyan, 7 = white
         }
     }
 }

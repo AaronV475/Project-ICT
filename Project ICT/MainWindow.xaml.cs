@@ -26,6 +26,7 @@ namespace Project_ICT
     {
         public SerialPort _serialPort;
         Animations _animation = new Animations();
+        Random _random = new Random();
 
         public int colorRed;
         public int colorGreen;
@@ -44,37 +45,47 @@ namespace Project_ICT
 
         }
 
-        private void btnAnimation1_Click(object sender, RoutedEventArgs e)
+        async private void btnAnimation1_Click(object sender, RoutedEventArgs e)
         {
+            lblColor.Content = _animation.RGB_ColorCombo(ColorButtons());
+            int ledAmount = Convert.ToInt16(Math.Pow(cubeSize, cube));
+
             if (_serialPort.IsOpen)
             {
-
+                for (int i = 0; i < ledAmount; i++)
+                {
+                    _animation.RGB_CubeFill(_random.Next(27), ColorButtons());
+                    _serialPort.Write(_animation.data, 0, 81);
+                    await Task.Delay(200);
+                }
             }
         }
 
         private async void btnAnimation2_Click(object sender, RoutedEventArgs e)
         {
-            int ledAmount = Convert.ToInt16(Math.Pow(cubeSize, cube));
-            for (int i = 0; i < ledAmount; i++)
-            {
-                _animation.RGB_CubeFill(i, ColorButtons());
-                lblData.Content = String.Join(" ", _animation.data3);
-                await Task.Delay(500);
-            }
             lblColor.Content = _animation.RGB_ColorCombo(ColorButtons());
+            int ledAmount = Convert.ToInt16(Math.Pow(cubeSize, cube));
+            
             if (_serialPort.IsOpen)
             {
+                for (int i = 0; i < ledAmount; i++)
+                {
+                    _animation.RGB_CubeFill(i, ColorButtons());
+                    _serialPort.Write(_animation.data, 0, 81);
+                    await Task.Delay(200);
+                }
             }
         }
 
         private void btnAnimation3_Click(object sender, RoutedEventArgs e)
         {
-            _animation.RGB_Animation(ColorButtons());
             lblColor.Content = _animation.RGB_ColorCombo(ColorButtons());
-            lblData.Content = String.Join(" ", _animation.data3);
+            int ledAmount = Convert.ToInt16(Math.Pow(cubeSize, cube));
+
             if (_serialPort.IsOpen)
             {
-                
+                _animation.RGB_Animation(ColorButtons());
+                _serialPort.Write(_animation.data, 0, 81);
             }
         }
 
@@ -109,6 +120,9 @@ namespace Project_ICT
                     if (cbxSerialSelect.SelectedItem.ToString() != "None")
                     {
                         _serialPort.PortName = cbxSerialSelect.SelectedItem.ToString() ?? "None";
+                        _serialPort.StopBits = StopBits.One;
+                        _serialPort.BaudRate = 250000;
+                        _serialPort.Parity = Parity.None;
                         _serialPort.Open();
                     }
                 }

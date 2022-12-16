@@ -32,11 +32,18 @@ namespace Project_ICT
         public int colorGreen;
         public int colorBlue;
         public int colorCombo = 0;
-        public double cubeSize = 3;
-        public double cube = 3;
-        public double plane = 2;
-        public double row = 1;
-        
+
+        static double CUBE_SIDES_MULTIPLIER = 3;
+        static double PLANE_SIDES_MULTIPLIER = 2;       // Modifiers for the calculation of the amount of leds.
+        static double ROW_SIDES_MULTIPLIER = 1;
+
+        static double LEDS_PER_ROW = 3;                 // Amount of leds per row, also for calculations. If the cube has a different amount of leds, change this.
+        static int BYTES_PER_LED = 3;                   // Amount of bytes a led needs to work. This value should nor really change for the most part.
+
+        static int amountOfLeds = Convert.ToInt16(Math.Pow(LEDS_PER_ROW, CUBE_SIDES_MULTIPLIER)); // Calculation for the total amount of leds.
+        static int amountOfBytes = amountOfLeds * BYTES_PER_LED;
+
+        static int WAIT_TIME = 200;                     // The amount of time between data outputs (in ms). Changes speed of leds changing.
         public MainWindow()
         {
             InitializeComponent();
@@ -48,15 +55,14 @@ namespace Project_ICT
         async private void btnAnimation1_Click(object sender, RoutedEventArgs e)
         {
             lblColor.Content = _animation.RGB_ColorCombo(ColorButtons());
-            int ledAmount = Convert.ToInt16(Math.Pow(cubeSize, cube));
 
             if (_serialPort.IsOpen)
             {
-                for (int i = 0; i < ledAmount; i++)
+                for (int i = 0; i < amountOfLeds; i++)
                 {
-                    _animation.RGB_CubeFill(_random.Next(27), ColorButtons());
-                    _serialPort.Write(_animation.data, 0, 81);
-                    await Task.Delay(200);
+                    _animation.RGB_CubeFill(_random.Next(amountOfLeds), ColorButtons());
+                    _serialPort.Write(_animation.data, 0, amountOfBytes);
+                    await Task.Delay(WAIT_TIME);
                 }
             }
         }
@@ -64,15 +70,14 @@ namespace Project_ICT
         private async void btnAnimation2_Click(object sender, RoutedEventArgs e)
         {
             lblColor.Content = _animation.RGB_ColorCombo(ColorButtons());
-            int ledAmount = Convert.ToInt16(Math.Pow(cubeSize, cube));
             
             if (_serialPort.IsOpen)
             {
-                for (int i = 0; i < ledAmount; i++)
+                for (int i = 0; i < amountOfLeds; i++)
                 {
                     _animation.RGB_CubeFill(i, ColorButtons());
-                    _serialPort.Write(_animation.data, 0, 81);
-                    await Task.Delay(200);
+                    _serialPort.Write(_animation.data, 0, amountOfBytes);
+                    await Task.Delay(WAIT_TIME);
                 }
             }
         }
@@ -80,12 +85,11 @@ namespace Project_ICT
         private void btnAnimation3_Click(object sender, RoutedEventArgs e)
         {
             lblColor.Content = _animation.RGB_ColorCombo(ColorButtons());
-            int ledAmount = Convert.ToInt16(Math.Pow(cubeSize, cube));
 
             if (_serialPort.IsOpen)
             {
                 _animation.RGB_Animation(ColorButtons());
-                _serialPort.Write(_animation.data, 0, 81);
+                _serialPort.Write(_animation.data, 0, amountOfBytes);
             }
         }
 
@@ -93,11 +97,11 @@ namespace Project_ICT
         {
             if (_serialPort.IsOpen)
             {
- 
+
             }
         }
 
-        private void cbxSerialSelect_DropDownOpened(object sender, EventArgs e)
+        private void cbxSerialSelect_DropDownOpened(object sender, EventArgs e) // Refreshes the list of COM-ports every time the combobox is opened.
         {
             // Refreshed de displayed ports in de combobox.
             cbxSerialSelect.Items.Clear();
@@ -108,7 +112,7 @@ namespace Project_ICT
             }
         }
 
-        private void cbxSerialSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbxSerialSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)   // Opens the selected COM-port when selected
         {
             if (_serialPort != null)
             {
@@ -117,7 +121,7 @@ namespace Project_ICT
 
                 if (cbxSerialSelect.SelectedItem != null)
                 {
-                    if (cbxSerialSelect.SelectedItem.ToString() != "None")
+                    if (cbxSerialSelect.SelectedItem.ToString() != "None")  // Confiquration to send to the specific led-cube we use.
                     {
                         _serialPort.PortName = cbxSerialSelect.SelectedItem.ToString() ?? "None";
                         _serialPort.StopBits = StopBits.One;
@@ -129,7 +133,7 @@ namespace Project_ICT
             }
         }
 
-        public int ColorButtons()
+        public int ColorButtons()   // Changes the value of colorCombo so colorcombinations can be made.
         {
             if (chbRed.IsChecked ?? false)
                 colorRed = 1;

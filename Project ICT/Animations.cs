@@ -10,9 +10,7 @@ namespace Project_ICT
     internal class Animations
     {
         public string colorString = "Off";
-
-        public byte[] data = new byte[] { // Hiermee specifiek de led aansturen en de 3 waardes van de led.
-             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        public byte[] data = new byte[81];
 
         public void RGB_Animation(int colorCombo)
         {
@@ -91,23 +89,23 @@ namespace Project_ICT
         {
             switch (colorInt)
             {
-                case 0: // Dark
+                case 0: 
                     return colorString = "Off";
-                case 1: // Red
+                case 1: 
                     return colorString = "Red";
-                case 2: // Green
+                case 2: 
                     return colorString = "Green";
-                case 3: // Yellow
+                case 3: 
                     return colorString = "Yellow";
-                case 4: // Blue
-                    return colorString = "BLue";
-                case 5: // Magenta
+                case 4: 
+                    return colorString = "Blue";
+                case 5: 
                     return colorString = "Magenta";
-                case 6: // Cyan
+                case 6: 
                     return colorString = "Cyan";
-                case 7: // White
+                case 7: 
                     return colorString = "White";
-                default: // Any other values will make the cube dark
+                default: 
                     return colorString = "Off";
             }
         }
@@ -162,6 +160,22 @@ namespace Project_ICT
                         data[ledNmbr * 3 + 2] = 0;
                     break;
             }
+        }
+
+        public void Running_LED(int ledNmbr)
+        {
+            data[ledNmbr * 3] = 255;
+            data[ledNmbr * 3 + 1] = 0;
+            data[ledNmbr * 3 + 2] = 255;
+
+            if (ledNmbr > 0)
+            {
+                data[(ledNmbr * 3) - 3] = 0;
+                data[(ledNmbr * 3) - 2] = 0;
+                data[(ledNmbr * 3) - 1] = 0;
+            }
+
+
         }
     }
 }

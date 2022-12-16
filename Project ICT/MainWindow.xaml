@@ -12,10 +12,11 @@
         </GroupBox>
         <GroupBox HorizontalAlignment="Center" Margin="5" Header="Animation select">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                <Button x:Name="btnAnimation1" Height="20" Width="100" Margin="20,5,20,5" Click="btnAnimation1_Click">Animation 1</Button>
-                <Button x:Name="btnAnimation2" Height="20" Width="100" Margin="20,5,20,5" Click="btnAnimation2_Click">Animation 2</Button>
-                <Button x:Name="btnAnimation3" Height="20" Width="100" Margin="20,5,20,5" Click="btnAnimation3_Click">Animation 3</Button>
-                <Button x:Name="btnAnimation4" Height="20" Width="100" Margin="20,5,20,5" Click="btnAnimation4_Click">Animation 4</Button>
+                <Button x:Name="btnAnimation1" Height="20" Width="150" Margin="20,5,20,5" Click="btnAnimation1_Click">Randomly fill the cube</Button>
+                <Button x:Name="btnAnimation2" Height="20" Width="150" Margin="20,5,20,5" Click="btnAnimation2_Click">Sequentially fill the cube</Button>
+                <Button x:Name="btnAnimation3" Height="20" Width="150" Margin="20,5,20,5" Click="btnAnimation3_Click">Change cube color</Button>
+                <Button x:Name="btnAnimation4" Height="20" Width="150" Margin="20,5,20,5" Click="btnAnimation4_Click">Fill and empty</Button>
+                <Button x:Name="btnAnimation5" Height="20" Width="150" Margin="20,5,20,5" Click="btnAnimation5_Click">Running LED</Button>
             </StackPanel>
         </GroupBox>
         <GroupBox HorizontalAlignment="Center" Margin="10" Header="Color select">

@@ -24,9 +24,12 @@ namespace Project_ICT
     /// </summary>
     public partial class MainWindow : Window
     {
-        public SerialPort _serialPort;
+        public SerialPort _serialPort = new SerialPort();
         Animations _animation = new Animations();
         Random _random = new Random();
+
+        List<int> listRandom = new List<int>(); // Creates a list for random values
+        int randomNumber;   // Used for random number storage.
 
         public int colorRed;
         public int colorGreen;
@@ -48,26 +51,36 @@ namespace Project_ICT
         {
             InitializeComponent();
 
-            _serialPort = new SerialPort();
-
         }
 
-        async private void btnAnimation1_Click(object sender, RoutedEventArgs e)
+        async private void btnAnimation1_Click(object sender, RoutedEventArgs e)    // Random fill animation
         {
             lblColor.Content = _animation.RGB_ColorCombo(ColorButtons());
 
             if (_serialPort.IsOpen)
             {
+                int randomLed = 0;
+                listRandom.Clear();
                 for (int i = 0; i < amountOfLeds; i++)
                 {
-                    _animation.RGB_CubeFill(_random.Next(amountOfLeds), ColorButtons());
+                    if (randomLed < amountOfLeds)   // Makes it so that no duplicates get send to the ledcube.
+                    {
+                        do
+                        {
+                            randomNumber = _random.Next(amountOfLeds);
+                        } while (listRandom.Contains(randomNumber));
+                        listRandom.Add(randomNumber);
+                        randomLed++;
+                    }
+
+                    _animation.RGB_CubeFill(randomNumber, ColorButtons());
                     _serialPort.Write(_animation.data, 0, amountOfBytes);
                     await Task.Delay(WAIT_TIME);
                 }
             }
         }
 
-        private async void btnAnimation2_Click(object sender, RoutedEventArgs e)
+        private async void btnAnimation2_Click(object sender, RoutedEventArgs e)    // Sequential fill animation
         {
             lblColor.Content = _animation.RGB_ColorCombo(ColorButtons());
             
@@ -82,7 +95,7 @@ namespace Project_ICT
             }
         }
 
-        private void btnAnimation3_Click(object sender, RoutedEventArgs e)
+        private void btnAnimation3_Click(object sender, RoutedEventArgs e)  // RGB color change animation
         {
             lblColor.Content = _animation.RGB_ColorCombo(ColorButtons());
 
@@ -93,23 +106,52 @@ namespace Project_ICT
             }
         }
 
-        private void btnAnimation4_Click(object sender, RoutedEventArgs e)
+        private async void btnAnimation4_Click(object sender, RoutedEventArgs e) // Fill and empty the cube.
         {
             if (_serialPort.IsOpen)
             {
+                lblColor.Content = _animation.RGB_ColorCombo(ColorButtons());
 
+                if (_serialPort.IsOpen)
+                {
+                    for (int i = 0; i < amountOfLeds; i++)
+                    {
+                        _animation.RGB_CubeFill(i, ColorButtons());
+                        _serialPort.Write(_animation.data, 0, amountOfBytes);
+                        await Task.Delay(WAIT_TIME / 2);
+                    }
+                    for (int i = 0; i < amountOfLeds; i++)
+                    {
+                        _animation.RGB_CubeFill(i, 0);
+                        _serialPort.Write(_animation.data, 0, amountOfBytes);
+                        await Task.Delay(WAIT_TIME / 2);
+                    }
+                }
+            }
+        }
+
+        private async void btnAnimation5_Click(object sender, RoutedEventArgs e)    // Makes a runnen led. This does not take a color.
+        {
+            lblColor.Content = _animation.RGB_ColorCombo(ColorButtons());
+
+            if (_serialPort.IsOpen)
+            {
+                for (int i = 0; i < amountOfLeds; i++)
+                {
+                    _animation.Running_LED(i);
+                    _serialPort.Write(_animation.data, 0, amountOfBytes);
+                    await Task.Delay(WAIT_TIME);
+                }
             }
         }
 
         private void cbxSerialSelect_DropDownOpened(object sender, EventArgs e) // Refreshes the list of COM-ports every time the combobox is opened.
         {
-            // Refreshed de displayed ports in de combobox.
             cbxSerialSelect.Items.Clear();
             cbxSerialSelect.Items.Add("None");
+
             foreach (string ports in SerialPort.GetPortNames())
-            {
                 cbxSerialSelect.Items.Add(ports);
-            }
         }
 
         private void cbxSerialSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)   // Opens the selected COM-port when selected

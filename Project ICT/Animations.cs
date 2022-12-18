@@ -9,8 +9,22 @@ namespace Project_ICT
 {
     internal class Animations
     {
-        public string colorString = "Off";
-        public byte[] data = new byte[81];
+        private string colorString = "Off";
+
+        public string ColorString
+        {
+            get { return colorString; }
+            set { colorString = value; }
+        }
+
+        private byte[] data = new byte[81];
+
+        public byte[] Data
+        {
+            get { return data; }
+            set { data = value; }
+        }
+
 
         public void RGB_Animation(int colorCombo)
         {
@@ -174,8 +188,6 @@ namespace Project_ICT
                 data[(ledNmbr * 3) - 2] = 0;
                 data[(ledNmbr * 3) - 1] = 0;
             }
-
-
         }
     }
 }

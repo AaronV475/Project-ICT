@@ -68,13 +68,14 @@ namespace Project_ICT
                         do
                         {
                             randomNumber = _random.Next(amountOfLeds);
-                        } while (listRandom.Contains(randomNumber));
+                        } 
+                        while (listRandom.Contains(randomNumber));
                         listRandom.Add(randomNumber);
                         randomLed++;
                     }
 
                     _animation.RGB_CubeFill(randomNumber, ColorButtons());
-                    _serialPort.Write(_animation.data, 0, amountOfBytes);
+                    _serialPort.Write(_animation.Data, 0, amountOfBytes);
                     await Task.Delay(WAIT_TIME);
                 }
             }
@@ -89,7 +90,7 @@ namespace Project_ICT
                 for (int i = 0; i < amountOfLeds; i++)
                 {
                     _animation.RGB_CubeFill(i, ColorButtons());
-                    _serialPort.Write(_animation.data, 0, amountOfBytes);
+                    _serialPort.Write(_animation.Data, 0, amountOfBytes);
                     await Task.Delay(WAIT_TIME);
                 }
             }
@@ -102,7 +103,7 @@ namespace Project_ICT
             if (_serialPort.IsOpen)
             {
                 _animation.RGB_Animation(ColorButtons());
-                _serialPort.Write(_animation.data, 0, amountOfBytes);
+                _serialPort.Write(_animation.Data, 0, amountOfBytes);
             }
         }
 
@@ -117,13 +118,13 @@ namespace Project_ICT
                     for (int i = 0; i < amountOfLeds; i++)
                     {
                         _animation.RGB_CubeFill(i, ColorButtons());
-                        _serialPort.Write(_animation.data, 0, amountOfBytes);
+                        _serialPort.Write(_animation.Data, 0, amountOfBytes);
                         await Task.Delay(WAIT_TIME / 2);
                     }
                     for (int i = 0; i < amountOfLeds; i++)
                     {
                         _animation.RGB_CubeFill(i, 0);
-                        _serialPort.Write(_animation.data, 0, amountOfBytes);
+                        _serialPort.Write(_animation.Data, 0, amountOfBytes);
                         await Task.Delay(WAIT_TIME / 2);
                     }
                 }
@@ -139,7 +140,8 @@ namespace Project_ICT
                 for (int i = 0; i < amountOfLeds; i++)
                 {
                     _animation.Running_LED(i);
-                    _serialPort.Write(_animation.data, 0, amountOfBytes);
+                    _serialPort.Write(_animation.Data, 0, amountOfBytes);
+
                     await Task.Delay(WAIT_TIME);
                 }
             }

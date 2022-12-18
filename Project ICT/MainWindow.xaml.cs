@@ -47,6 +47,7 @@ namespace Project_ICT
         static int amountOfBytes = amountOfLeds * BYTES_PER_LED;
 
         static int WAIT_TIME = 200;                     // The amount of time between data outputs (in ms). Changes speed of leds changing.
+
         public MainWindow()
         {
             InitializeComponent();

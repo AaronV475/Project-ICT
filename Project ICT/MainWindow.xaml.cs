@@ -134,8 +134,6 @@ namespace Project_ICT
 
         private async void btnAnimation5_Click(object sender, RoutedEventArgs e)    // Makes a runnen led. This does not take a color.
         {
-            lblColor.Content = _animation.RGB_ColorCombo(ColorButtons());
-
             if (_serialPort.IsOpen)
             {
                 for (int i = 0; i < amountOfLeds; i++)
